@@ -1,15 +1,16 @@
 package org.sobotics.boson.framework.services.others;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import java.io.IOException;
+import java.util.List;
+
 import org.sobotics.boson.framework.model.heatdetector.request.Content;
 import org.sobotics.boson.framework.model.heatdetector.request.HeatDetectorRequest;
 import org.sobotics.boson.framework.model.heatdetector.response.HeatDetectorResponse;
 import org.sobotics.boson.framework.model.heatdetector.response.Result;
 import org.sobotics.boson.framework.utils.HttpRequestUtils;
 
-import java.io.IOException;
-import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 public class HeatDetectorService {
 
@@ -25,7 +26,7 @@ public class HeatDetectorService {
         this.domain = domain;
     }
 
-    public List<Result> getHeatDetectorData(List<Content> inputData){
+    public List<Result> getHeatDetectorData(List<Content> inputData) {
 
         HeatDetectorRequest request = new HeatDetectorRequest();
         request.setContents(inputData);
@@ -39,7 +40,7 @@ public class HeatDetectorService {
             returnData = HttpRequestUtils.postJson(URL, new Gson().toJson(request));
         } catch (IOException e) {
             e.printStackTrace();
-            return  null;
+            return null;
         }
 
         handleBackoff(returnData);
@@ -61,7 +62,7 @@ public class HeatDetectorService {
     private void handleBackoff(JsonObject root) {
         if (root.has("backOff")) {
             int backoff = root.get("backOff").getAsInt();
-            //System.out.println("Backing off for " + backoff+ " milliseconds");
+            // System.out.println("Backing off for " + backoff + " milliseconds");
             try {
                 Thread.sleep(backoff);
             } catch (InterruptedException e) {

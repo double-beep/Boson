@@ -1,13 +1,13 @@
 package org.sobotics.boson.bot.model;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Map;
+
 import net.sourceforge.argparse4j.inf.Argument;
 import net.sourceforge.argparse4j.inf.ArgumentAction;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Map;
 
 public class BosonHelpArgumentAction implements ArgumentAction {
 

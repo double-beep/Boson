@@ -43,10 +43,10 @@ public class HeatDetectorResponse {
 
     @Override
     public String toString() {
-        return "HeatDetectorResponse{" +
-                "domain='" + domain + '\'' +
-                ", result=" + result +
-                ", backoff=" + backoff +
-                '}';
+        return "HeatDetectorResponse{"
+              + "domain='" + domain + '\''
+              + ", result=" + result
+              + ", backoff=" + backoff
+              + '}';
     }
 }

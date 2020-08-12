@@ -31,9 +31,9 @@ public class Content {
 
     @Override
     public String toString() {
-        return "Content{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                '}';
+        return "Content{"
+              + "id=" + id
+              + ", text='" + text + '\''
+              + '}';
     }
 }

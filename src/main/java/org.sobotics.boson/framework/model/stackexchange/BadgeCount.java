@@ -43,11 +43,11 @@ public class BadgeCount {
 
     @Override
     public String toString() {
-        return "BadgeCount{" +
-                "bronze=" + bronze +
-                ", gold=" + gold +
-                ", silver=" + silver +
-                '}';
+        return "BadgeCount{"
+              + "bronze=" + bronze
+              + ", gold=" + gold
+              + ", silver=" + silver
+              + '}';
     }
 
     public BadgeCount getBadgeCountFromJson(JsonObject json) {

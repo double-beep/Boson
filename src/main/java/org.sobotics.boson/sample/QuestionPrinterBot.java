@@ -20,10 +20,10 @@ public class QuestionPrinterBot {
         this.frequency = frequency;
     }
 
-    public void start(){
+    public void start() {
         ChatRoom chatRoom = new ChatRoom(room);
 
-        Filter[]  filters = {};//{new HasCloseVoteFilter(3)};
+        Filter[] filters = {}; // {new HasCloseVoteFilter(3)};
         Monitor[] monitors = {new QuestionMonitor(chatRoom, frequency, site, "", "", filters,
                 new CloseVoteQuestionPrinter(site), null)};
 

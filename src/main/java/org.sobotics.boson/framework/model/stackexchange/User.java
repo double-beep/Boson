@@ -1,7 +1,5 @@
 package org.sobotics.boson.framework.model.stackexchange;
 
-import com.google.gson.JsonObject;
-
 import java.time.Instant;
 
 public class User {
@@ -35,7 +33,11 @@ public class User {
     private int viewCount;
     private String websiteUrl;
 
-    public User(String aboutMe, int acceptRate, int accountId, int age, int answerCount, BadgeCount badgeCounts, Instant creationDate, String displayName, int downVoteCount, boolean isEmployee, Instant lastAccessDate, Instant lastModifiedDate, String link, String location, String profileImage, int questionCount, int reputation, int reputationChangeDay, int reputationChangeMonth, int reputationChangeQuarter, int reputationChangeWeek, int reputationChangeYear, Instant timedPenaltyDate, int upVoteCount, int userId, String userType, int viewCount, String websiteUrl) {
+    public User(String aboutMe, int acceptRate, int accountId, int age, int answerCount, BadgeCount badgeCounts, Instant creationDate,
+                String displayName, int downVoteCount, boolean isEmployee, Instant lastAccessDate, Instant lastModifiedDate,
+                String link, String location, String profileImage, int questionCount, int reputation, int reputationChangeDay,
+                int reputationChangeMonth, int reputationChangeQuarter, int reputationChangeWeek, int reputationChangeYear,
+                Instant timedPenaltyDate, int upVoteCount, int userId, String userType, int viewCount, String websiteUrl) {
         this.aboutMe = aboutMe;
         this.acceptRate = acceptRate;
         this.accountId = accountId;

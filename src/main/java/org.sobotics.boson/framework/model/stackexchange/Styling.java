@@ -1,8 +1,5 @@
 package org.sobotics.boson.framework.model.stackexchange;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 public class Styling {
     private String linkColor;
     private String tagBackgroundColor;
@@ -43,10 +40,10 @@ public class Styling {
 
     @Override
     public String toString() {
-        return "Styling{" +
-                "linkColor='" + linkColor + '\'' +
-                ", tagBackgroundColor='" + tagBackgroundColor + '\'' +
-                ", tagForegroundColor='" + tagForegroundColor + '\'' +
-                '}';
+        return "Styling{"
+              + "linkColor='" + linkColor + '\''
+              + ", tagBackgroundColor='" + tagBackgroundColor + '\''
+              + ", tagForegroundColor='" + tagForegroundColor + '\''
+              + '}';
     }
 }

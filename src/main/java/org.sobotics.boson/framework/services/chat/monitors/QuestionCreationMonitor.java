@@ -1,5 +1,9 @@
 package org.sobotics.boson.framework.services.chat.monitors;
 
+import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
+
 import org.sobotics.boson.framework.exceptions.StackExchangeApiException;
 import org.sobotics.boson.framework.model.chat.ChatRoom;
 import org.sobotics.boson.framework.model.stackexchange.Question;
@@ -8,11 +12,7 @@ import org.sobotics.boson.framework.services.chat.printers.PrinterService;
 import org.sobotics.boson.framework.services.dashboard.DashboardService;
 import org.sobotics.boson.framework.services.data.ApiService;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.List;
-
-public class QuestionCreationMonitor extends Monitor<Question, Question>{
+public class QuestionCreationMonitor extends Monitor<Question, Question> {
 
     private Instant previousTime;
 
@@ -31,9 +31,9 @@ public class QuestionCreationMonitor extends Monitor<Question, Question>{
         } catch (StackExchangeApiException e) {
             e.printStackTrace();
         }
-        for (Question question: questions){
-            for (Filter<Question> filter: filters){
-                if(filter.filter(question)){
+        for (Question question : questions) {
+            for (Filter<Question> filter : filters) {
+                if (filter.filter(question)) {
                     room.getRoom().send(getFinalPrintString(printer, dashboard, question));
                 }
             }

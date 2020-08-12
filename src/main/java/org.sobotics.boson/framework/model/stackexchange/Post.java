@@ -3,7 +3,7 @@ package org.sobotics.boson.framework.model.stackexchange;
 import java.time.Instant;
 import java.util.Arrays;
 
-public class Post implements Content{
+public class Post implements Content {
 
     private String body;
     private String bodyMarkdown;
@@ -26,7 +26,9 @@ public class Post implements Content{
     public Post() {
     }
 
-    public Post(String body, String bodyMarkdown, int commentCount, Comment[] comments, Instant creationDate, int downVoteCount, Instant lastActivityDate, Instant lastEditDate, ShallowUser lastEditor, String link, ShallowUser owner, int postId, String postType, int score, String shareLink, String title, int upVoteCount) {
+    public Post(String body, String bodyMarkdown, int commentCount, Comment[] comments, Instant creationDate, int downVoteCount,
+                Instant lastActivityDate, Instant lastEditDate, ShallowUser lastEditor, String link, ShallowUser owner, int postId,
+                String postType, int score, String shareLink, String title, int upVoteCount) {
         this.body = body;
         this.bodyMarkdown = bodyMarkdown;
         this.commentCount = commentCount;
@@ -199,24 +201,24 @@ public class Post implements Content{
 
     @Override
     public String toString() {
-        return "Post{" +
-                "body='" + body + '\'' +
-                ", bodyMarkdown='" + bodyMarkdown + '\'' +
-                ", commentCount=" + commentCount +
-                ", comments=" + Arrays.toString(comments) +
-                ", creationDate=" + creationDate +
-                ", downVoteCount=" + downVoteCount +
-                ", lastActivityDate=" + lastActivityDate +
-                ", lastEditDate=" + lastEditDate +
-                ", lastEditor=" + lastEditor +
-                ", link='" + link + '\'' +
-                ", owner=" + owner +
-                ", postId=" + postId +
-                ", postType='" + postType + '\'' +
-                ", score=" + score +
-                ", shareLink='" + shareLink + '\'' +
-                ", title='" + title + '\'' +
-                ", upVoteCount=" + upVoteCount +
-                '}';
+        return "Post{"
+              + "body='" + body + '\''
+              + ", bodyMarkdown='" + bodyMarkdown + '\''
+              + ", commentCount=" + commentCount
+              + ", comments=" + Arrays.toString(comments)
+              + ", creationDate=" + creationDate
+              + ", downVoteCount=" + downVoteCount
+              + ", lastActivityDate=" + lastActivityDate
+              + ", lastEditDate=" + lastEditDate
+              + ", lastEditor=" + lastEditor
+              + ", link='" + link + '\''
+              + ", owner=" + owner
+              + ", postId=" + postId
+              + ", postType='" + postType + '\''
+              + ", score=" + score
+              + ", shareLink='" + shareLink + '\''
+              + ", title='" + title + '\''
+              + ", upVoteCount=" + upVoteCount
+              + '}';
     }
 }

@@ -42,10 +42,10 @@ public class Notice {
 
     @Override
     public String toString() {
-        return "Notice{" +
-                "body='" + body + '\'' +
-                ", creationDate=" + creationDate +
-                ", ownerUserId=" + ownerUserId +
-                '}';
+        return "Notice{"
+             + "body='" + body + '\''
+             + ", creationDate=" + creationDate
+             + ", ownerUserId=" + ownerUserId
+             + '}';
     }
 }

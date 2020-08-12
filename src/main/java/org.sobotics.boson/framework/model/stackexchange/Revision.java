@@ -26,7 +26,9 @@ public class Revision {
     public Revision() {
     }
 
-    public Revision(String body, String comment, Instant creationDate, Boolean isRollback, String lastBody, String[] lastTags, String lastTitle, Integer postId, String postType, String revisionGuid, Integer revisionNumber, String revisionType, Boolean setCommunityWiki, String[] tags, String title, ShallowUser user) {
+    public Revision(String body, String comment, Instant creationDate, Boolean isRollback, String lastBody, String[] lastTags,
+                    String lastTitle, Integer postId, String postType, String revisionGuid, Integer revisionNumber,
+                    String revisionType, Boolean setCommunityWiki, String[] tags, String title, ShallowUser user) {
         this.body = body;
         this.comment = comment;
         this.creationDate = creationDate;
@@ -175,23 +177,23 @@ public class Revision {
 
     @Override
     public String toString() {
-        return "Revision{" +
-                "body='" + body + '\'' +
-                ", comment='" + comment + '\'' +
-                ", creationDate=" + creationDate +
-                ", isRollback=" + isRollback +
-                ", lastBody='" + lastBody + '\'' +
-                ", lastTags=" + Arrays.toString(lastTags) +
-                ", lastTitle='" + lastTitle + '\'' +
-                ", postId=" + postId +
-                ", postType='" + postType + '\'' +
-                ", revisionGuid='" + revisionGuid + '\'' +
-                ", revisionNumber=" + revisionNumber +
-                ", revisionType='" + revisionType + '\'' +
-                ", setCommunityWiki=" + setCommunityWiki +
-                ", tags=" + Arrays.toString(tags) +
-                ", title='" + title + '\'' +
-                ", user=" + user +
-                '}';
+        return "Revision{"
+              + "body='" + body + '\''
+              + ", comment='" + comment + '\''
+              + ", creationDate=" + creationDate
+              + ", isRollback=" + isRollback
+              + ", lastBody='" + lastBody + '\''
+              + ", lastTags=" + Arrays.toString(lastTags)
+              + ", lastTitle='" + lastTitle + '\''
+              + ", postId=" + postId
+              + ", postType='" + postType + '\''
+              + ", revisionGuid='" + revisionGuid + '\''
+              + ", revisionNumber=" + revisionNumber
+              + ", revisionType='" + revisionType + '\''
+              + ", setCommunityWiki=" + setCommunityWiki
+              + ", tags=" + Arrays.toString(tags)
+              + ", title='" + title + '\''
+              + ", user=" + user
+              + '}';
     }
 }

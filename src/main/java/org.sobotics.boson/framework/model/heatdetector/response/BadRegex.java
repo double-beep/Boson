@@ -31,9 +31,9 @@ public class BadRegex {
 
     @Override
     public String toString() {
-        return "BadRegex{" +
-                "regex='" + regex + '\'' +
-                ", type=" + type +
-                '}';
+        return "BadRegex{"
+              + "regex='" + regex + '\''
+              + ", type=" + type
+              + '}';
     }
 }

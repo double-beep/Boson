@@ -63,12 +63,12 @@ public class ClosedDetails {
 
     @Override
     public String toString() {
-        return "ClosedDetails{" +
-                "byUsers=" + Arrays.toString(byUsers) +
-                ", description='" + description + '\'' +
-                ", onHold=" + onHold +
-                ", originalQuestions=" + Arrays.toString(originalQuestions) +
-                ", reason='" + reason + '\'' +
-                '}';
+        return "ClosedDetails{"
+              + "byUsers=" + Arrays.toString(byUsers)
+              + ", description='" + description + '\''
+              + ", onHold=" + onHold
+              + ", originalQuestions=" + Arrays.toString(originalQuestions)
+              + ", reason='" + reason + '\''
+              + '}';
     }
 }

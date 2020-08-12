@@ -95,15 +95,15 @@ public class Tag {
 
     @Override
     public String toString() {
-        return "Tag{" +
-                "count=" + count +
-                ", hasSynonyms=" + hasSynonyms +
-                ", isModeratorOnly=" + isModeratorOnly +
-                ", isRequired=" + isRequired +
-                ", lastActivityDate=" + lastActivityDate +
-                ", name='" + name + '\'' +
-                ", synonyms=" + Arrays.toString(synonyms) +
-                ", userId=" + userId +
-                '}';
+        return "Tag{"
+              + "count=" + count
+              + ", hasSynonyms=" + hasSynonyms
+              + ", isModeratorOnly=" + isModeratorOnly
+              + ", isRequired=" + isRequired
+              + ", lastActivityDate=" + lastActivityDate
+              + ", name='" + name + '\''
+              + ", synonyms=" + Arrays.toString(synonyms)
+              + ", userId=" + userId
+              + '}';
     }
 }

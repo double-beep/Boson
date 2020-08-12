@@ -7,7 +7,7 @@ public class UserIdFilter extends Filter<Content> {
 
     // TODO: REMOVE THIS IN PRODUCTION!!!!!!!!!!!!!
 
-    public UserIdFilter(int userId){
+    public UserIdFilter(int userId) {
         this.userId = userId;
     }
 

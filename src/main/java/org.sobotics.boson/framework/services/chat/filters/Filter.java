@@ -6,10 +6,10 @@ import java.util.List;
 public abstract class Filter<T> {
     public abstract boolean filter(T data);
 
-    public List<Boolean> filterAll(List<T> dataList){
+    public List<Boolean> filterAll(List<T> dataList) {
         List<Boolean> returnData = new ArrayList<>();
 
-        for(T data: dataList){
+        for (T data : dataList) {
             returnData.add(filter(data));
         }
         return returnData;

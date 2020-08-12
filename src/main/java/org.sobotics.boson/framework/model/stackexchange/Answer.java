@@ -4,7 +4,7 @@ package org.sobotics.boson.framework.model.stackexchange;
 import java.time.Instant;
 import java.util.Arrays;
 
-public class Answer implements Content{
+public class Answer implements Content {
 
     private int answerId;
     private int awardedBountyAmount;
@@ -31,7 +31,11 @@ public class Answer implements Content{
     private String title;
     private int upVoteCount;
 
-    public Answer(int answerId, int awardedBountyAmount, ShallowUser[] awardedBountyUsers, String body, String bodyMarkdown, boolean canFlag, int commentCount, Comment[] comments, Instant communityOwnedDate, Instant creationDate, int downVoteCount, boolean isAccepted, Instant lastActivityDate, Instant lastEditDate, ShallowUser lastEditor, String link, Instant lockedDate, ShallowUser owner, int questionId, int score, String shareLink, String[] tags, String title, int upVoteCount) {
+    public Answer(int answerId, int awardedBountyAmount, ShallowUser[] awardedBountyUsers, String body, String bodyMarkdown,
+                  boolean canFlag, int commentCount, Comment[] comments, Instant communityOwnedDate, Instant creationDate,
+                  int downVoteCount, boolean isAccepted, Instant lastActivityDate, Instant lastEditDate, ShallowUser lastEditor,
+                  String link, Instant lockedDate, ShallowUser owner, int questionId, int score, String shareLink,
+                  String[] tags, String title, int upVoteCount) {
         this.answerId = answerId;
         this.awardedBountyAmount = awardedBountyAmount;
         this.awardedBountyUsers = awardedBountyUsers;
@@ -260,31 +264,31 @@ public class Answer implements Content{
 
     @Override
     public String toString() {
-        return "Answer{" +
-                "answerId=" + answerId +
-                ", awardedBountyAmount=" + awardedBountyAmount +
-                ", awardedBountyUsers=" + Arrays.toString(awardedBountyUsers) +
-                ", body='" + body + '\'' +
-                ", bodyMarkdown='" + bodyMarkdown + '\'' +
-                ", canFlag=" + canFlag +
-                ", commentCount=" + commentCount +
-                ", comments=" + Arrays.toString(comments) +
-                ", communityOwnedDate=" + communityOwnedDate +
-                ", creationDate=" + creationDate +
-                ", downVoteCount=" + downVoteCount +
-                ", isAccepted=" + isAccepted +
-                ", lastActivityDate=" + lastActivityDate +
-                ", lastEditDate=" + lastEditDate +
-                ", lastEditor=" + lastEditor +
-                ", link='" + link + '\'' +
-                ", lockedDate=" + lockedDate +
-                ", owner=" + owner +
-                ", questionId=" + questionId +
-                ", score=" + score +
-                ", shareLink='" + shareLink + '\'' +
-                ", tags=" + Arrays.toString(tags) +
-                ", title='" + title + '\'' +
-                ", upVoteCount=" + upVoteCount +
-                '}';
+        return "Answer{"
+              + "answerId=" + answerId
+              + ", awardedBountyAmount=" + awardedBountyAmount
+              + ", awardedBountyUsers=" + Arrays.toString(awardedBountyUsers)
+              + ", body='" + body + '\''
+              + ", bodyMarkdown='" + bodyMarkdown + '\''
+              + ", canFlag=" + canFlag
+              + ", commentCount=" + commentCount
+              + ", comments=" + Arrays.toString(comments)
+              + ", communityOwnedDate=" + communityOwnedDate
+              + ", creationDate=" + creationDate
+              + ", downVoteCount=" + downVoteCount
+              + ", isAccepted=" + isAccepted
+              + ", lastActivityDate=" + lastActivityDate
+              + ", lastEditDate=" + lastEditDate
+              + ", lastEditor=" + lastEditor
+              + ", link='" + link + '\''
+              + ", lockedDate=" + lockedDate
+              + ", owner=" + owner
+              + ", questionId=" + questionId
+              + ", score=" + score
+              + ", shareLink='" + shareLink + '\''
+              + ", tags=" + Arrays.toString(tags)
+              + ", title='" + title + '\''
+              + ", upVoteCount=" + upVoteCount
+              + '}';
     }
 }

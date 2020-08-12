@@ -2,7 +2,7 @@ package org.sobotics.boson.framework.model.stackexchange;
 
 import java.time.Instant;
 
-public class Comment implements Content{
+public class Comment implements Content {
     private String body;
     private String bodyMarkdown;
     private boolean canFlag;
@@ -16,7 +16,8 @@ public class Comment implements Content{
     private ShallowUser replyToUser;
     private int score;
 
-    public Comment(String body, String bodyMarkdown, boolean canFlag, int commentId, Instant creationDate, boolean edited, String link, ShallowUser owner, int postId, String postType, ShallowUser replyToUser, int score) {
+    public Comment(String body, String bodyMarkdown, boolean canFlag, int commentId, Instant creationDate, boolean edited,
+                   String link, ShallowUser owner, int postId, String postType, ShallowUser replyToUser, int score) {
         this.body = body;
         this.bodyMarkdown = bodyMarkdown;
         this.canFlag = canFlag;
@@ -137,19 +138,19 @@ public class Comment implements Content{
 
     @Override
     public String toString() {
-        return "Comment{" +
-                "body='" + body + '\'' +
-                ", bodyMarkdown='" + bodyMarkdown + '\'' +
-                ", canFlag=" + canFlag +
-                ", commentId=" + commentId +
-                ", creationDate=" + creationDate +
-                ", edited=" + edited +
-                ", link='" + link + '\'' +
-                ", owner=" + owner +
-                ", postId=" + postId +
-                ", postType='" + postType + '\'' +
-                ", replyToUser=" + replyToUser +
-                ", score=" + score +
-                '}';
+        return "Comment{"
+              + "body='" + body + '\''
+              + ", bodyMarkdown='" + bodyMarkdown + '\''
+              + ", canFlag=" + canFlag
+              + ", commentId=" + commentId
+              + ", creationDate=" + creationDate
+              + ", edited=" + edited
+              + ", link='" + link + '\''
+              + ", owner=" + owner
+              + ", postId=" + postId
+              + ", postType='" + postType + '\''
+              + ", replyToUser=" + replyToUser
+              + ", score=" + score
+              + '}';
     }
 }

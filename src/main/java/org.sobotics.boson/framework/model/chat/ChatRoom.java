@@ -1,10 +1,10 @@
 package org.sobotics.boson.framework.model.chat;
 
+import java.util.function.Consumer;
+
 import org.sobotics.chatexchange.chat.ChatHost;
 import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.chatexchange.chat.event.*;
-
-import java.util.function.Consumer;
 
 public class ChatRoom {
     private int roomId;
@@ -20,7 +20,11 @@ public class ChatRoom {
     private Consumer<MessageDeletedEvent> messageDeletedEventConsumer;
     private Consumer<KickedEvent> kickedEventConsumer;
 
-    public ChatRoom(int roomId, ChatHost chatHost, Room room, Consumer<UserMentionedEvent> userMentionedEventConsumer, Consumer<MessageReplyEvent> messageReplyEventConsumer, Consumer<MessageEditedEvent> messageEditedEventConsumer, Consumer<MessagePostedEvent> messagePostedEventConsumer, Consumer<UserEnteredEvent> userEnteredEventConsumer, Consumer<UserLeftEvent> userLeftEventConsumer, Consumer<MessageStarredEvent> messageStarredEventConsumer, Consumer<MessageDeletedEvent> messageDeletedEventConsumer, Consumer<KickedEvent> kickedEventConsumer) {
+    public ChatRoom(int roomId, ChatHost chatHost, Room room, Consumer<UserMentionedEvent> userMentionedEventConsumer,
+                    Consumer<MessageReplyEvent> messageReplyEventConsumer, Consumer<MessageEditedEvent> messageEditedEventConsumer,
+                    Consumer<MessagePostedEvent> messagePostedEventConsumer, Consumer<UserEnteredEvent> userEnteredEventConsumer,
+                    Consumer<UserLeftEvent> userLeftEventConsumer, Consumer<MessageStarredEvent> messageStarredEventConsumer,
+                    Consumer<MessageDeletedEvent> messageDeletedEventConsumer, Consumer<KickedEvent> kickedEventConsumer) {
         this.roomId = roomId;
         this.chatHost = chatHost;
         this.room = room;
@@ -151,19 +155,19 @@ public class ChatRoom {
 
     @Override
     public String toString() {
-        return "ChatRoom{" +
-                "roomId=" + roomId +
-                ", chatHost=" + chatHost +
-                ", room=" + room +
-                ", userMentionedEventConsumer=" + userMentionedEventConsumer +
-                ", messageReplyEventConsumer=" + messageReplyEventConsumer +
-                ", messageEditedEventConsumer=" + messageEditedEventConsumer +
-                ", messagePostedEventConsumer=" + messagePostedEventConsumer +
-                ", userEnteredEventConsumer=" + userEnteredEventConsumer +
-                ", userLeftEventConsumer=" + userLeftEventConsumer +
-                ", messageStarredEventConsumer=" + messageStarredEventConsumer +
-                ", messageDeletedEventConsumer=" + messageDeletedEventConsumer +
-                ", kickedEventConsumer=" + kickedEventConsumer +
-                '}';
+        return "ChatRoom{"
+              + "roomId=" + roomId
+              + ", chatHost=" + chatHost
+              + ", room=" + room
+              + ", userMentionedEventConsumer=" + userMentionedEventConsumer
+              + ", messageReplyEventConsumer=" + messageReplyEventConsumer
+              + ", messageEditedEventConsumer=" + messageEditedEventConsumer
+              + ", messagePostedEventConsumer=" + messagePostedEventConsumer
+              + ", userEnteredEventConsumer=" + userEnteredEventConsumer
+              + ", userLeftEventConsumer=" + userLeftEventConsumer
+              + ", messageStarredEventConsumer=" + messageStarredEventConsumer
+              + ", messageDeletedEventConsumer=" + messageDeletedEventConsumer
+              + ", kickedEventConsumer=" + kickedEventConsumer
+              + '}';
     }
 }

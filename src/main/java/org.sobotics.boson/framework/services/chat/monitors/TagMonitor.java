@@ -1,5 +1,10 @@
 package org.sobotics.boson.framework.services.chat.monitors;
 
+import java.io.IOException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.sobotics.boson.framework.model.chat.ChatRoom;
 import org.sobotics.boson.framework.model.stackexchange.Tag;
 import org.sobotics.boson.framework.services.chat.filters.Filter;
@@ -7,12 +12,7 @@ import org.sobotics.boson.framework.services.chat.printers.PrinterService;
 import org.sobotics.boson.framework.services.dashboard.DashboardService;
 import org.sobotics.boson.framework.services.data.ApiService;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-
-public class TagMonitor extends Monitor<Tag, List<Tag>>{
+public class TagMonitor extends Monitor<Tag, List<Tag>> {
 
     private Instant previousTime;
 
@@ -25,11 +25,11 @@ public class TagMonitor extends Monitor<Tag, List<Tag>>{
     @Override
     protected void monitor(ChatRoom room, String site, Filter<Tag>[] filters, PrinterService<List<Tag>> printer,
                            ApiService apiService, DashboardService dashboardService) throws IOException {
-        List<Tag> tags = apiService.getTags(site,  previousTime);
+        List<Tag> tags = apiService.getTags(site, previousTime);
         List<Tag> filteredTags = new ArrayList<>();
-        for (Tag tag: tags){
-            for (Filter<Tag> filter: filters){
-                if(filter.filter(tag)){
+        for (Tag tag : tags) {
+            for (Filter<Tag> filter : filters) {
+                if (filter.filter(tag)) {
                     filteredTags.add(tag);
                 }
             }

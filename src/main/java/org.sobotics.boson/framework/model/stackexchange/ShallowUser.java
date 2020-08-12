@@ -90,15 +90,15 @@ public class ShallowUser {
 
     @Override
     public String toString() {
-        return "ShallowUser{" +
-                "acceptRate=" + acceptRate +
-                ", badgeCounts=" + badgeCounts +
-                ", displayName='" + displayName + '\'' +
-                ", link='" + link + '\'' +
-                ", profileImage='" + profileImage + '\'' +
-                ", reputation=" + reputation +
-                ", userId=" + userId +
-                ", userType='" + userType + '\'' +
-                '}';
+        return "ShallowUser{"
+              + "acceptRate=" + acceptRate
+              + ", badgeCounts=" + badgeCounts
+              + ", displayName='" + displayName + '\''
+              + ", link='" + link + '\''
+              + ", profileImage='" + profileImage + '\''
+              + ", reputation=" + reputation
+              + ", userId=" + userId
+              + ", userType='" + userType + '\''
+              + '}';
     }
 }

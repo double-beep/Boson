@@ -1,11 +1,10 @@
 package org.sobotics.boson.bot;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.security.SecureRandom;
+import java.util.*;
 
-import io.swagger.client.ApiException;
-import net.sourceforge.argparse4j.ArgumentParsers;
-import net.sourceforge.argparse4j.inf.ArgumentParser;
-import net.sourceforge.argparse4j.inf.ArgumentParserException;
-import net.sourceforge.argparse4j.inf.Namespace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sobotics.boson.bot.model.*;
@@ -27,10 +26,11 @@ import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.chatexchange.chat.StackExchangeClient;
 import org.sobotics.chatexchange.chat.event.EventType;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.security.SecureRandom;
-import java.util.*;
+import io.swagger.client.ApiException;
+import net.sourceforge.argparse4j.ArgumentParsers;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
+import net.sourceforge.argparse4j.inf.Namespace;
 
 public class BosonBot {
 
@@ -66,21 +66,21 @@ public class BosonBot {
         this.dashboardKey = dashboardKey;
     }
 
-    public void start(){
+    public void start() {
         try {
             room.send("Boson Started");
             logger.info("Started");
             room.addEventListener(EventType.USER_MENTIONED, event -> {
                 Message message = event.getMessage();
                 System.out.println(message.getPlainContent());
-                String arguments[] = message.getPlainContent().split(" ");
+                String[] arguments = message.getPlainContent().split(" ");
                 switch (arguments[1]) {
                     case "track":
                         trackCommand(message);
                         break;
                     case "help":
-                        room.send("Use the command `track sitename posttype frequency` to start tracking sites " +
-                                "(`track -h` gives a longer description)");
+                        room.send("Use the command `track sitename posttype frequency` to start tracking sites "
+                              + "(`track -h` gives a longer description)");
                         break;
                     case "alive":
                         room.send("Yes, I'm alive");
@@ -94,7 +94,7 @@ public class BosonBot {
                 }
             });
         }
-        catch (Exception e){ // TODO : REMOVE THE POKEMON EXCEPTION HANDLING AFTER TESTING IS OVER
+        catch (Exception e) { // TODO : REMOVE THE POKEMON EXCEPTION HANDLING AFTER TESTING IS OVER
             e.printStackTrace();
         }
     }
@@ -107,11 +107,10 @@ public class BosonBot {
         try {
             if (bots.containsKey(argument)) {
                 ChatRoomService chatRoomService = bots.get(argument).getChatRoomService();
-                int stoppingBotID = bots.get(argument).getChatRoom().getRoomId();
+                int stoppingBotId = bots.get(argument).getChatRoom().getRoomId();
                 chatRoomService.stopService();
                 bots.remove(argument);
-                if (findChatRoomByRoomId(stoppingBotID) == null &&
-                        stoppingBotID != room.getRoomId()) {
+                if (findChatRoomByRoomId(stoppingBotId) == null && stoppingBotId != room.getRoomId()) {
                     chatRoomService.terminateService();
                 }
                 room.send("Bot " + argument + " stopped");
@@ -119,18 +118,20 @@ public class BosonBot {
                 room.send("Wrong bot ID");
             }
         }
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void trackCommand(Message message) {
         String[] splits = message.getPlainContent().split(" ");
-        String arguments[] = Arrays.copyOfRange(splits, 2, splits.length);
+        String[] arguments = Arrays.copyOfRange(splits, 2, splits.length);
         try {
             Namespace res = parseArguments(arguments);
 
-            if (res == null) return;
+            if (res == null) {
+                return;
+            }
 
             String site = res.getString("site");
             Type posttype = res.get("type");
@@ -139,52 +140,55 @@ public class BosonBot {
             ChatHost otherHost = res.get("host");
             List<FilterTypes> requestedFilters = res.get("filter");
             List<String> requestedValues = res.get("value");
-            String ID = res.get("name");
-            if (ID==null)
-                ID = getUniqueId();
-            if (bots.containsKey(ID)) {
+            String id = res.get("name");
+            if (id == null) {
+                id = getUniqueId();
+            }
+            if (bots.containsKey(id)) {
                 room.send("There is already another bot with the same name. Please create a unique name for your bot");
                 return;
             }
             List<Filter> filters = new ArrayList<>();
             try {
-                if (requestedFilters!=null) {
+                if (requestedFilters != null) {
                     for (int i = 0; i < requestedFilters.size(); i++) {
                         filters.add(getFilterFromRequestedFilter(requestedFilters.get(i), requestedValues.get(i), site));
                     }
+                } else {
+                    filters.add(new EmptyFilter());
                 }
-                else filters.add(new EmptyFilter());
             }
-            catch (NumberFormatException e){
+            catch (NumberFormatException e) {
                 e.printStackTrace();
                 room.send("`value` should be a Integer");
                 return;
             }
 
             ChatRoom chatRoom;
-            if (otherRoomId!=null) {
-                if (otherHost==null)
+            if (otherRoomId != null) {
+                if (otherHost == null) {
                     throw new TrackParsingException("Unknown chat host. Use one of STACK_OVERFLOW or STACK_EXCHANGE");
+                }
                 chatRoom = getChatRoom(otherRoomId, otherHost);
             }
             else {
                 chatRoom = new ChatRoom(room);
             }
 
-            chatRoom.getRoom().send("Tracking "+posttype+" on "+site+ " as directed in ["+room.getThumbs().getName()
-                    +"]("+ room.getHost().getBaseUrl()+"/rooms/"+room.getRoomId()+")");
+            chatRoom.getRoom().send("Tracking " + posttype + " on " + site + " as directed in [" + room.getThumbs().getName()
+                    + "](" + room.getHost().getBaseUrl() + "/rooms/" + room.getRoomId() + ")");
 
             PrinterService printerService = getPrinterServiceFromPrinter(res, chatRoom);
             DashboardService dashboardService = null;
             try {
-                dashboardService = getDashboardService(res, ID);
+                dashboardService = getDashboardService(res, id);
             }
-            catch (ApiException e){
+            catch (ApiException e) {
                 e.printStackTrace();
             }
             Monitor[] monitors = getMonitors(site, posttype, frequency, chatRoom,
                     filters.toArray(new Filter[0]), printerService, dashboardService);
-            if(monitors==null) {
+            if (monitors == null) {
                 room.send("The only types supported are questions, answers and tags");
             }
             else {
@@ -196,27 +200,27 @@ public class BosonBot {
                     service.initializeService();
                 }
                 service.startService();
-                bots.put(ID, new Bot(ID, chatRoom, service, posttype, requestedFilters, res.get("printer"), frequency,
+                bots.put(id, new Bot(id, chatRoom, service, posttype, requestedFilters, res.get("printer"), frequency,
                         room.getHost().getBaseUrl() + "/messages/" + message.getId() + "/history"));
-                room.send("New tracker started: [" + ID + "](" + bots.get(ID).getCreationMessageUrl() + ")");
+                room.send("New tracker started: [" + id + "](" + bots.get(id).getCreationMessageUrl() + ")");
             }
         }
-        catch (TrackParsingException e){
-            room.send("    "+e.getMessage().replace("\n", "\n    "));
+        catch (TrackParsingException e) {
+            room.send("    " + e.getMessage().replace("\n", "\n    "));
         }
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private DashboardService getDashboardService(Namespace res, String ID) throws ApiException {
+    private DashboardService getDashboardService(Namespace res, String id) throws ApiException {
         DashboardTypes dashboard = res.get("dash");
-        if (dashboard==null) {
+        if (dashboard == null) {
             return null;
         }
         else {
             switch (dashboard) {
-                case HIGGS: return new HiggsService(dashboardUrl, dashboardApi, dashboardKey, ID);
+                case HIGGS: return new HiggsService(dashboardUrl, dashboardApi, dashboardKey, id);
                 default: return null;
             }
         }
@@ -228,8 +232,8 @@ public class BosonBot {
         Type type = res.get("type");
         String site = res.getString("site");
 
-        if(printer==null){
-            switch (type){
+        if (printer == null) {
+            switch (type) {
                 case questions:
                 case answers:
                 case comments:
@@ -240,7 +244,7 @@ public class BosonBot {
             }
         }
 
-        switch (printer){
+        switch (printer) {
             case ONE_BOX:
                 return new ContentOneBoxPrinter<>(chatRoom);
             case LIST_TAGS:
@@ -253,9 +257,9 @@ public class BosonBot {
 
     }
 
-    private Filter getFilterFromRequestedFilter(FilterTypes filter, String value, String site) throws  NumberFormatException{
+    private Filter getFilterFromRequestedFilter(FilterTypes filter, String value, String site) throws NumberFormatException {
 
-        if (filter!=null) {
+        if (filter != null) {
 
             switch (filter) {
                 case REPUTATION:
@@ -284,10 +288,11 @@ public class BosonBot {
     private String getUniqueId() {
         char[] characs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
         Random secureRandom = new SecureRandom();
-        StringBuilder ID = new StringBuilder();
-        for (int i = 0; i < 10; i++)
-            ID.append(characs[secureRandom.nextInt(characs.length)]);
-        return ID.toString();
+        StringBuilder id = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            id.append(characs[secureRandom.nextInt(characs.length)]);
+        }
+        return id.toString();
     }
 
     private Monitor[] getMonitors(String site, Type posttype, int frequency, ChatRoom chatRoom, Filter[] filters,
@@ -328,12 +333,12 @@ public class BosonBot {
         return chatRoom;
     }
 
-    private String findChatRoomByRoomId(int roomId){
-        for (String key: bots.keySet()){
-            System.out.println("Searching "+key+" for roomID "+roomId);
+    private String findChatRoomByRoomId(int roomId) {
+        for (String key: bots.keySet()) {
+            System.out.println("Searching " + key + " for roomID " + roomId);
             Bot bot = bots.get(key);
-            if(bot.getChatRoom().getRoomId()==roomId){
-                System.out.println("Found "+key + "for roomID "+roomId);
+            if (bot.getChatRoom().getRoomId() == roomId) {
+                System.out.println("Found " + key + " for roomID " + roomId);
                 return key;
             }
         }
@@ -344,13 +349,15 @@ public class BosonBot {
 
         ArgumentParser parser = ArgumentParsers.newFor("track").addHelp(false).build()
                 .description("Argument Parser for the bot.");
+
         parser.addArgument("site").type(String.class).metavar("sitename")
                 .help("Site where the bot has to be run");
+
         parser.addArgument("type").type(Type.class).metavar("trackingType")
                 .help("Type of the tracker needed. Can be one of {questions,answers,comments,posts,tags}");
+
         parser.addArgument("frequency").type(Integer.class)
                 .help("Frequency of the tracker in seconds");
-
 
         parser.addArgument("-d", "--dash").type(DashboardTypes.class).nargs("?")
                 .help("Set the dashboard to be used by the bot");
@@ -380,9 +387,9 @@ public class BosonBot {
         Namespace res;
         try {
             res = parser.parseArgs(args);
-        } catch (BosonHelpScreenParserException e){
+        } catch (BosonHelpScreenParserException e) {
             throw new TrackParsingException(e.getParserMessage());
-        } catch (ArgumentParserException e){
+        } catch (ArgumentParserException e) {
             StringWriter out = new StringWriter();
             PrintWriter writer = new PrintWriter(out);
             parser.handleError(e, writer);
@@ -393,10 +400,4 @@ public class BosonBot {
         return res;
     }
 
-
 }
-
-
-
-
-

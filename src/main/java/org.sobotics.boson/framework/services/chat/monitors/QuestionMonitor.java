@@ -1,5 +1,10 @@
 package org.sobotics.boson.framework.services.chat.monitors;
 
+import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.sobotics.boson.framework.exceptions.StackExchangeApiException;
 import org.sobotics.boson.framework.model.chat.ChatRoom;
 import org.sobotics.boson.framework.model.stackexchange.Question;
@@ -8,12 +13,7 @@ import org.sobotics.boson.framework.services.chat.printers.PrinterService;
 import org.sobotics.boson.framework.services.dashboard.DashboardService;
 import org.sobotics.boson.framework.services.data.ApiService;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class QuestionMonitor extends Monitor<Question, Question>{
+public class QuestionMonitor extends Monitor<Question, Question> {
 
     private Instant previousLastActivityDate;
 
@@ -31,7 +31,7 @@ public class QuestionMonitor extends Monitor<Question, Question>{
         try {
             questions = apiService.getQuestions(site, 1, 100, null);
             questions = questions.stream().filter(question -> question.getLastActivityDate().isAfter(previousLastActivityDate)).collect(Collectors.toList());
-            if (questions.size()>0) {
+            if (questions.size() > 0) {
                 previousLastActivityDate = questions.get(0).getLastActivityDate();
             }
 
@@ -40,9 +40,9 @@ public class QuestionMonitor extends Monitor<Question, Question>{
             e.printStackTrace();
             return;
         }
-        for (Question question: questions){
-            for (Filter<Question> filter: filters){
-                if(filter.filter(question)){
+        for (Question question : questions) {
+            for (Filter<Question> filter : filters) {
+                if (filter.filter(question)) {
                     room.getRoom().send(getFinalPrintString(printer, dashboard, question));
                 }
             }

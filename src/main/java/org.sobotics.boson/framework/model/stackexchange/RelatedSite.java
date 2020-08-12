@@ -1,8 +1,5 @@
 package org.sobotics.boson.framework.model.stackexchange;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 public class RelatedSite {
     private String apiSiteParameter;
     private String name;
@@ -54,12 +51,12 @@ public class RelatedSite {
 
     @Override
     public String toString() {
-        return "RelatedSite{" +
-                "apiSiteParameter='" + apiSiteParameter + '\'' +
-                ", name='" + name + '\'' +
-                ", relation='" + relation + '\'' +
-                ", siteUrl='" + siteUrl + '\'' +
-                '}';
+        return "RelatedSite{"
+              + "apiSiteParameter='" + apiSiteParameter + '\''
+              + ", name='" + name + '\''
+              + ", relation='" + relation + '\''
+              + ", siteUrl='" + siteUrl + '\''
+              + '}';
     }
 
 }

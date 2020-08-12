@@ -1,5 +1,8 @@
 package org.sobotics.boson.sample;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.sobotics.boson.framework.model.chat.ChatRoom;
 import org.sobotics.boson.framework.model.stackexchange.Tag;
 import org.sobotics.boson.framework.services.chat.ChatRoomService;
@@ -15,9 +18,6 @@ import org.sobotics.boson.framework.services.chat.monitors.TagMonitor;
 import org.sobotics.boson.framework.services.chat.printers.ListOfTagsPrinter;
 import org.sobotics.chatexchange.chat.Room;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class TagMonitorBot {
 
     private Room room;
@@ -30,7 +30,7 @@ public class TagMonitorBot {
         this.frequency = frequency;
     }
 
-    public void start(){
+    public void start() {
         ChatRoom chatRoom = new ChatRoom(room);
 
         Map<Command, Object[]> userMentionCommands = new HashMap<>();
@@ -38,14 +38,13 @@ public class TagMonitorBot {
         userMentionCommands.put(new Help(), new Object[0]);
         chatRoom.setUserMentionedEventConsumer(new UserMentionedListener().getUserMentionedEventConsumer(room, userMentionCommands));
 
-
         Map<Command, Object[]> messageReplyCommands = new HashMap<>();
         messageReplyCommands.put(new Alive(), new Object[0]);
         messageReplyCommands.put(new Help(), new Object[0]);
         chatRoom.setMessageReplyEventConsumer(new MessageReplyEventListener().getMessageReplyEventListener(room, messageReplyCommands));
 
-        Filter[]  filters = {new EmptyFilter<Tag>()};
-        Monitor[] monitors = {new TagMonitor(chatRoom, frequency, site, "","",  filters,
+        Filter[] filters = {new EmptyFilter<Tag>()};
+        Monitor[] monitors = {new TagMonitor(chatRoom, frequency, site, "", "", filters,
                 new ListOfTagsPrinter(site), null)};
 
         ChatRoomService service = new ChatRoomService(chatRoom, monitors);

@@ -1,15 +1,15 @@
 package org.sobotics.boson.framework.services.chat.filters;
 
-import org.sobotics.boson.framework.model.heatdetector.request.Content;
-import org.sobotics.boson.framework.model.heatdetector.response.Result;
-import org.sobotics.boson.framework.model.stackexchange.Comment;
-import org.sobotics.boson.framework.services.others.HeatDetectorService;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.sobotics.boson.framework.model.heatdetector.request.Content;
+import org.sobotics.boson.framework.model.heatdetector.response.Result;
+import org.sobotics.boson.framework.model.stackexchange.Comment;
+import org.sobotics.boson.framework.services.others.HeatDetectorService;
 
 public class HeatDetectorFilter extends SpecialFilter<Comment> {
 
@@ -24,6 +24,7 @@ public class HeatDetectorFilter extends SpecialFilter<Comment> {
         this.results = new ArrayList<>();
         this.messages = new HashMap<>();
     }
+
     public HeatDetectorFilter(HeatDetectorService service) {
         this.value = service.getLimit();
         this.service = service;
@@ -43,7 +44,7 @@ public class HeatDetectorFilter extends SpecialFilter<Comment> {
         contentList.add(new Content(data.getCommentId(), data.getBody()));
 
         results = service.getHeatDetectorData(contentList);
-        if (results.size()>0){
+        if (results.size() > 0) {
             messages.put(results.get(0).getId(), prettyPrintResult(results.get(0)));
         }
 
@@ -57,7 +58,7 @@ public class HeatDetectorFilter extends SpecialFilter<Comment> {
         List<Long> ids = new ArrayList<>();
         List<Content> contentList = new ArrayList<>();
 
-        for (Comment data: dataList){
+        for (Comment data : dataList) {
             ids.add(data.getCommentId());
             contentList.add(new Content(data.getCommentId(), data.getBody()));
         }
@@ -65,25 +66,23 @@ public class HeatDetectorFilter extends SpecialFilter<Comment> {
         results = service.getHeatDetectorData(contentList);
         List<Long> resultIds = new ArrayList<>();
 
-
-        for (Result result: results){
+        for (Result result: results) {
             resultIds.add(result.getId());
             messages.put(result.getId(), prettyPrintResult(result));
         }
 
-        for(long id: ids){
+        for (long id : ids) {
             returnData.add(resultIds.contains(id));
         }
 
-        return  returnData;
+        return returnData;
     }
 
-    private String prettyPrintResult(Result result){
+    private String prettyPrintResult(Result result) {
 
         DecimalFormat decimalFormat = new DecimalFormat("##.00");
-        return "Naïve Bayes "+ decimalFormat.format(result.getNb()) +"; " +
-                "OpenNLP "+ decimalFormat.format(result.getOp()) +"; ";
-
+        return "Naïve Bayes " + decimalFormat.format(result.getNb()) + "; "
+             + "OpenNLP " + decimalFormat.format(result.getOp()) + "; ";
 
     }
 }

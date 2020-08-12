@@ -50,11 +50,11 @@ public class OriginalQuestion {
 
     @Override
     public String toString() {
-        return "OriginalQuestion{" +
-                "acceptedAnswerId=" + acceptedAnswerId +
-                ", answerCount=" + answerCount +
-                ", questionId=" + questionId +
-                ", title='" + title + '\'' +
-                '}';
+        return "OriginalQuestion{"
+              + "acceptedAnswerId=" + acceptedAnswerId
+              + ", answerCount=" + answerCount
+              + ", questionId=" + questionId
+              + ", title='" + title + '\''
+              + '}';
     }
 }

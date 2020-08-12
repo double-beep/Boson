@@ -1,5 +1,8 @@
 package org.sobotics.boson.sample;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.sobotics.boson.framework.model.chat.ChatRoom;
 import org.sobotics.boson.framework.model.stackexchange.Answer;
 import org.sobotics.boson.framework.services.chat.ChatRoomService;
@@ -14,9 +17,6 @@ import org.sobotics.boson.framework.services.chat.monitors.Monitor;
 import org.sobotics.boson.framework.services.chat.printers.GenericContentPrinterService;
 import org.sobotics.chatexchange.chat.Room;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class AnswerPrinterBot {
 
     private Room room;
@@ -29,19 +29,18 @@ public class AnswerPrinterBot {
         this.frequency = frequency;
     }
 
-    public void start(){
+    public void start() {
         ChatRoom chatRoom = new ChatRoom(room);
 
         Map<Command, Object[]> userMentionCommands = new HashMap<>();
         userMentionCommands.put(new Alive(), new Object[0]);
         chatRoom.setUserMentionedEventConsumer(new UserMentionedListener().getUserMentionedEventConsumer(room, userMentionCommands));
 
-
         Map<Command, Object[]> messageReplyCommands = new HashMap<>();
         messageReplyCommands.put(new Alive(), new Object[0]);
         chatRoom.setMessageReplyEventConsumer(new MessageReplyEventListener().getMessageReplyEventListener(room, messageReplyCommands));
 
-        Filter[]  filters = {new EmptyFilter<Answer>()};
+        Filter[] filters = {new EmptyFilter<Answer>()};
         Monitor[] monitors = {new AnswerMonitor(chatRoom, frequency, site, "", "", filters,
                 new GenericContentPrinterService<Answer>(site), null)};
 

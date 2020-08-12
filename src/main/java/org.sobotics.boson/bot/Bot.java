@@ -1,13 +1,13 @@
 package org.sobotics.boson.bot;
 
+import java.util.List;
+
 import org.sobotics.boson.bot.model.FilterTypes;
 import org.sobotics.boson.bot.model.PrinterTypes;
 import org.sobotics.boson.bot.model.Type;
 import org.sobotics.boson.framework.model.chat.ChatRoom;
 import org.sobotics.boson.framework.services.chat.ChatRoomService;
 import org.sobotics.chatexchange.chat.ChatHost;
-
-import java.util.List;
 
 public class Bot {
     private String identifier;
@@ -23,7 +23,6 @@ public class Bot {
     private Integer chatRoomId;
     private ChatHost chatHost;
 
-
     public Bot(String identifier, ChatRoom chatRoom, ChatRoomService chatRoomService, Type type,
                List<FilterTypes> filterTypes, PrinterTypes printer, Integer frequency, String creationMessageUrl) {
         this.identifier = identifier;
@@ -31,12 +30,10 @@ public class Bot {
         this.chatRoomService = chatRoomService;
         this.creationMessageUrl = creationMessageUrl;
 
-
         this.type = type;
         this.filterTypes = filterTypes;
         this.printer = printer;
         this.frequency = frequency;
-
     }
 
     public String getIdentifier() {

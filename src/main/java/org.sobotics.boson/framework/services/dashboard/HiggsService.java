@@ -1,5 +1,14 @@
 package org.sobotics.boson.framework.services.dashboard;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.sobotics.boson.framework.model.stackexchange.*;
+import org.threeten.bp.Instant;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.Configuration;
@@ -8,15 +17,6 @@ import io.swagger.client.model.AquireTokenRequest;
 import io.swagger.client.model.AquireTokenResponse;
 import io.swagger.client.model.RegisterPostReason;
 import io.swagger.client.model.RegisterPostRequest;
-import org.jsoup.Jsoup;
-import org.sobotics.boson.framework.model.stackexchange.*;
-import org.threeten.bp.Instant;
-import org.threeten.bp.OffsetDateTime;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZoneOffset;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HiggsService implements DashboardService<Content> {
 
@@ -25,8 +25,6 @@ public class HiggsService implements DashboardService<Content> {
     private String key;
     private String botName;
     private BotApi botApi;
-
-
 
     public HiggsService(String url, String api_url, String key, String botName) throws ApiException {
         this.url = url;
@@ -48,14 +46,18 @@ public class HiggsService implements DashboardService<Content> {
     @Override
     public String createReport(Content content) throws ApiException {
 
-        if (content instanceof Question)
-            return  addNewQuestion((Question) content);
-        if (content instanceof Answer)
-            return  addNewAnswer((Answer) content);
-        if (content instanceof Comment)
-            return  addNewComment((Comment) content);
-        if (content instanceof Post)
-            return  addNewPost((Post) content);
+        if (content instanceof Question) {
+            return addNewQuestion((Question) content);
+        }
+        if (content instanceof Answer) {
+            return addNewAnswer((Answer) content);
+        }
+        if (content instanceof Comment) {
+            return addNewComment((Comment) content);
+        }
+        if (content instanceof Post) {
+            return addNewPost((Post) content);
+        }
 
         return null;
     }
@@ -65,7 +67,7 @@ public class HiggsService implements DashboardService<Content> {
         rpr.authorName(post.getOwner().getDisplayName());
         rpr.authorReputation(post.getOwner().getReputation());
         rpr.setTitle(post.getTitle());
-        rpr.setContentId((long)post.getPostId());
+        rpr.setContentId((long) post.getPostId());
         rpr.setContent(Jsoup.parse(post.getBody()).text());
         rpr.setContentSite(post.getLink().split("/")[2]);
         rpr.setContentType("answer");
@@ -81,15 +83,15 @@ public class HiggsService implements DashboardService<Content> {
         rpr.authorName(comment.getOwner().getDisplayName());
         rpr.authorReputation(comment.getOwner().getReputation());
         String title = Jsoup.parse(comment.getBody()).text();
-        if (title.length()>80){
-            int index = title.indexOf(' ',60);
-            if (index>0 && index<80){
-                title = title.substring(0,index);
-            }else{
-                title = title.substring(0,80);
+        if (title.length() > 80) {
+            int index = title.indexOf(' ', 60);
+            if (index > 0 && index < 80) {
+                title = title.substring(0, index);
+            } else {
+                title = title.substring(0, 80);
             }
         }
-        if (title.length()<=1){
+        if (title.length() <= 1) {
             title = "Empty";
         }
         rpr.setTitle(title);
@@ -109,7 +111,7 @@ public class HiggsService implements DashboardService<Content> {
         rpr.authorName(answer.getOwner().getDisplayName());
         rpr.authorReputation(answer.getOwner().getReputation());
         rpr.setTitle(answer.getTitle());
-        rpr.setContentId((long)answer.getAnswerId());
+        rpr.setContentId((long) answer.getAnswerId());
         rpr.setContent(Jsoup.parse(answer.getBody()).text());
         rpr.setContentSite(answer.getLink().split("/")[2]);
         rpr.setContentType("answer");
@@ -125,7 +127,7 @@ public class HiggsService implements DashboardService<Content> {
         rpr.authorName(question.getOwner().getDisplayName());
         rpr.authorReputation(question.getOwner().getReputation());
         rpr.setTitle(question.getTitle());
-        rpr.setContentId((long)question.getQuestionId());
+        rpr.setContentId((long) question.getQuestionId());
         rpr.setContent(Jsoup.parse(question.getBody()).text());
         rpr.setContentSite(question.getLink().split("/")[2]);
         rpr.setContentType("answer");
@@ -155,5 +157,3 @@ public class HiggsService implements DashboardService<Content> {
     }
 
 }
-
-

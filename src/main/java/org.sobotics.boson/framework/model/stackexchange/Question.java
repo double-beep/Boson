@@ -3,7 +3,7 @@ package org.sobotics.boson.framework.model.stackexchange;
 import java.time.Instant;
 import java.util.Arrays;
 
-public class Question implements Content{
+public class Question implements Content {
 
     private int acceptedAnswerId;
     private int answerCount;
@@ -50,7 +50,14 @@ public class Question implements Content{
     public Question() {
     }
 
-    public Question(int acceptedAnswerId, int answerCount, Answer[] answers, String body, String bodyMarkdown, int bountyAmount, Instant bountyClosesDate, ShallowUser bountyUser, boolean canClose, boolean canFlag, int closeVoteCount, Instant closedDate, ClosedDetails closedDetails, String closedReason, int commentCount, Comment[] comments, Instant communityOwnedDate, Instant creationDate, int deleteVoteCount, int downVoteCount, int favoriteCount, boolean isAnswered, Instant lastActivityDate, Instant lastEditDate, ShallowUser lastEditor, String link, Instant lockedDate, MigrationInfo migratedFrom, MigrationInfo migratedTo, Notice notice, ShallowUser owner, Instant protectedDate, int questionId, int reopenVoteCount, int score, String shareLink, String[] tags, String title, int upVoteCount, int viewCount) {
+    public Question(int acceptedAnswerId, int answerCount, Answer[] answers, String body, String bodyMarkdown, int bountyAmount,
+                    Instant bountyClosesDate, ShallowUser bountyUser, boolean canClose, boolean canFlag, int closeVoteCount,
+                    Instant closedDate, ClosedDetails closedDetails, String closedReason, int commentCount, Comment[] comments,
+                    Instant communityOwnedDate, Instant creationDate, int deleteVoteCount, int downVoteCount, int favoriteCount,
+                    boolean isAnswered, Instant lastActivityDate, Instant lastEditDate, ShallowUser lastEditor, String link,
+                    Instant lockedDate, MigrationInfo migratedFrom, MigrationInfo migratedTo, Notice notice, ShallowUser owner,
+                    Instant protectedDate, int questionId, int reopenVoteCount, int score, String shareLink, String[] tags,
+                    String title, int upVoteCount, int viewCount) {
         this.acceptedAnswerId = acceptedAnswerId;
         this.answerCount = answerCount;
         this.answers = answers;
@@ -420,48 +427,48 @@ public class Question implements Content{
 
     @Override
     public String toString() {
-        return "Question{" +
-                "acceptedAnswerId=" + acceptedAnswerId +
-                ", answerCount=" + answerCount +
-                ", answers=" + Arrays.toString(answers) +
-                ", body='" + body + '\'' +
-                ", bodyMarkdown='" + bodyMarkdown + '\'' +
-                ", bountyAmount=" + bountyAmount +
-                ", bountyClosesDate=" + bountyClosesDate +
-                ", bountyUser=" + bountyUser +
-                ", canClose=" + canClose +
-                ", canFlag=" + canFlag +
-                ", closeVoteCount=" + closeVoteCount +
-                ", closedDate=" + closedDate +
-                ", closedDetails=" + closedDetails +
-                ", closedReason='" + closedReason + '\'' +
-                ", commentCount=" + commentCount +
-                ", comments=" + Arrays.toString(comments) +
-                ", communityOwnedDate=" + communityOwnedDate +
-                ", creationDate=" + creationDate +
-                ", deleteVoteCount=" + deleteVoteCount +
-                ", downVoteCount=" + downVoteCount +
-                ", favoriteCount=" + favoriteCount +
-                ", isAnswered=" + isAnswered +
-                ", lastActivityDate=" + lastActivityDate +
-                ", lastEditDate=" + lastEditDate +
-                ", lastEditor=" + lastEditor +
-                ", link='" + link + '\'' +
-                ", lockedDate=" + lockedDate +
-                ", migratedFrom=" + migratedFrom +
-                ", migratedTo=" + migratedTo +
-                ", notice=" + notice +
-                ", owner=" + owner +
-                ", protectedDate=" + protectedDate +
-                ", questionId=" + questionId +
-                ", reopenVoteCount=" + reopenVoteCount +
-                ", score=" + score +
-                ", shareLink='" + shareLink + '\'' +
-                ", tags=" + Arrays.toString(tags) +
-                ", title='" + title + '\'' +
-                ", upVoteCount=" + upVoteCount +
-                ", viewCount=" + viewCount +
-                '}';
+        return "Question{"
+              + "acceptedAnswerId=" + acceptedAnswerId
+              + ", answerCount=" + answerCount
+              + ", answers=" + Arrays.toString(answers)
+              + ", body='" + body + '\''
+              + ", bodyMarkdown='" + bodyMarkdown + '\''
+              + ", bountyAmount=" + bountyAmount
+              + ", bountyClosesDate=" + bountyClosesDate
+              + ", bountyUser=" + bountyUser
+              + ", canClose=" + canClose
+              + ", canFlag=" + canFlag
+              + ", closeVoteCount=" + closeVoteCount
+              + ", closedDate=" + closedDate
+              + ", closedDetails=" + closedDetails
+              + ", closedReason='" + closedReason + '\''
+              + ", commentCount=" + commentCount
+              + ", comments=" + Arrays.toString(comments)
+              + ", communityOwnedDate=" + communityOwnedDate
+              + ", creationDate=" + creationDate
+              + ", deleteVoteCount=" + deleteVoteCount
+              + ", downVoteCount=" + downVoteCount
+              + ", favoriteCount=" + favoriteCount
+              + ", isAnswered=" + isAnswered
+              + ", lastActivityDate=" + lastActivityDate
+              + ", lastEditDate=" + lastEditDate
+              + ", lastEditor=" + lastEditor
+              + ", link='" + link + '\''
+              + ", lockedDate=" + lockedDate
+              + ", migratedFrom=" + migratedFrom
+              + ", migratedTo=" + migratedTo
+              + ", notice=" + notice
+              + ", owner=" + owner
+              + ", protectedDate=" + protectedDate
+              + ", questionId=" + questionId
+              + ", reopenVoteCount=" + reopenVoteCount
+              + ", score=" + score
+              + ", shareLink='" + shareLink + '\''
+              + ", tags=" + Arrays.toString(tags)
+              + ", title='" + title + '\''
+              + ", upVoteCount=" + upVoteCount
+              + ", viewCount=" + viewCount
+              + '}';
     }
 
 

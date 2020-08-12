@@ -1,11 +1,7 @@
 package org.sobotics.boson.framework.model.stackexchange;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.stream.StreamSupport;
 
 public class Site {
 
@@ -28,7 +24,10 @@ public class Site {
     private Styling styling;
     private String twitterAccount;
 
-    public Site(String[] aliases, String apiSiteParameter, String audience, Instant closedBetaDate, String faviconUrl, String highResolutionIconUrl, String iconUrl, Instant launchDate, String logoUrl, String[] markdownExtensions, String name, Instant openBetaDate, RelatedSite[] relatedSites, String siteState, String siteType, String siteUrl, Styling styling, String twitterAccount) {
+    public Site(String[] aliases, String apiSiteParameter, String audience, Instant closedBetaDate, String faviconUrl,
+                String highResolutionIconUrl, String iconUrl, Instant launchDate, String logoUrl, String[] markdownExtensions,
+                String name, Instant openBetaDate, RelatedSite[] relatedSites, String siteState, String siteType, String siteUrl,
+                Styling styling, String twitterAccount) {
         this.aliases = aliases;
         this.apiSiteParameter = apiSiteParameter;
         this.audience = audience;
@@ -198,26 +197,26 @@ public class Site {
 
     @Override
     public String toString() {
-        return "Site{" +
-                "aliases=" + Arrays.toString(aliases) +
-                ", apiSiteParameter='" + apiSiteParameter + '\'' +
-                ", audience='" + audience + '\'' +
-                ", closedBetaDate=" + closedBetaDate +
-                ", faviconUrl='" + faviconUrl + '\'' +
-                ", highResolutionIconUrl='" + highResolutionIconUrl + '\'' +
-                ", iconUrl='" + iconUrl + '\'' +
-                ", launchDate=" + launchDate +
-                ", logoUrl='" + logoUrl + '\'' +
-                ", markdownExtensions=" + Arrays.toString(markdownExtensions) +
-                ", name='" + name + '\'' +
-                ", openBetaDate=" + openBetaDate +
-                ", relatedSites=" + Arrays.toString(relatedSites) +
-                ", siteState='" + siteState + '\'' +
-                ", siteType='" + siteType + '\'' +
-                ", siteUrl='" + siteUrl + '\'' +
-                ", styling=" + styling +
-                ", twitterAccount='" + twitterAccount + '\'' +
-                '}';
+        return "Site{"
+              + "aliases=" + Arrays.toString(aliases)
+              + ", apiSiteParameter='" + apiSiteParameter + '\''
+              + ", audience='" + audience + '\''
+              + ", closedBetaDate=" + closedBetaDate
+              + ", faviconUrl='" + faviconUrl + '\''
+              + ", highResolutionIconUrl='" + highResolutionIconUrl + '\''
+              + ", iconUrl='" + iconUrl + '\''
+              + ", launchDate=" + launchDate
+              + ", logoUrl='" + logoUrl + '\''
+              + ", markdownExtensions=" + Arrays.toString(markdownExtensions)
+              + ", name='" + name + '\''
+              + ", openBetaDate=" + openBetaDate
+              + ", relatedSites=" + Arrays.toString(relatedSites)
+              + ", siteState='" + siteState + '\''
+              + ", siteType='" + siteType + '\''
+              + ", siteUrl='" + siteUrl + '\''
+              + ", styling=" + styling
+              + ", twitterAccount='" + twitterAccount + '\''
+              + '}';
     }
 
 

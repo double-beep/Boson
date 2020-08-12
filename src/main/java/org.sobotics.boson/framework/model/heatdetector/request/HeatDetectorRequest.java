@@ -43,10 +43,10 @@ public class HeatDetectorRequest {
 
     @Override
     public String toString() {
-        return "HeatDetectorRequest{" +
-                "domain='" + domain + '\'' +
-                ", minScore=" + minScore +
-                ", contents=" + contents +
-                '}';
+        return "HeatDetectorRequest{"
+              + "domain='" + domain + '\''
+              + ", minScore=" + minScore
+              + ", contents=" + contents
+              + '}';
     }
 }

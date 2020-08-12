@@ -61,12 +61,12 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Result{" +
-                "id=" + id +
-                ", nb=" + nb +
-                ", op=" + op +
-                ", bad=" + bad +
-                ", score=" + score +
-                '}';
+        return "Result{"
+              + "id=" + id
+              + ", nb=" + nb
+              + ", op=" + op
+              + ", bad=" + bad
+              + ", score=" + score
+              + '}';
     }
 }

@@ -42,10 +42,10 @@ public class MigrationInfo {
 
     @Override
     public String toString() {
-        return "MigrationInfo{" +
-                "onDate=" + onDate +
-                ", otherSite=" + otherSite +
-                ", questionId=" + questionId +
-                '}';
+        return "MigrationInfo{"
+              + "onDate=" + onDate
+              + ", otherSite=" + otherSite
+              + ", questionId=" + questionId
+              + '}';
     }
 }

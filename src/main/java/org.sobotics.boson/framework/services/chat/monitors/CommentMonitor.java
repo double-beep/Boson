@@ -1,6 +1,12 @@
 package org.sobotics.boson.framework.services.chat.monitors;
 
-import io.swagger.client.ApiException;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.sobotics.boson.framework.model.chat.ChatRoom;
 import org.sobotics.boson.framework.model.stackexchange.Comment;
 import org.sobotics.boson.framework.services.chat.filters.Filter;
@@ -10,14 +16,9 @@ import org.sobotics.boson.framework.services.chat.printers.SpecialPrinterService
 import org.sobotics.boson.framework.services.dashboard.DashboardService;
 import org.sobotics.boson.framework.services.data.ApiService;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.swagger.client.ApiException;
 
-public class CommentMonitor extends Monitor<Comment, Comment>{
+public class CommentMonitor extends Monitor<Comment, Comment> {
 
     private Instant previousTime;
 
@@ -34,29 +35,28 @@ public class CommentMonitor extends Monitor<Comment, Comment>{
         List<Comment> display = apiService.getComments(site, 1, 100, previousTime);
         Map messages = new HashMap<Long, String>();
 
-        for (Filter<Comment> filter: filters){
+        for (Filter<Comment> filter : filters) {
 
             List<Boolean> filterResult = filter.filterAll(display);
-            if (filter instanceof SpecialFilter){
+            if (filter instanceof SpecialFilter) {
                 messages = ((SpecialFilter) filter).getMessages();
             }
             List<Comment> tempDisplay = new ArrayList<>();
 
-            for(int i = 0; i< filterResult.size(); i++){
+            for (int i = 0; i < filterResult.size(); i++) {
                 boolean result = filterResult.get(i);
                 Comment comment = display.get(i);
-                if(result){
+                if (result) {
                     tempDisplay.add(comment);
                 }
             }
             display = tempDisplay;
         }
 
-
-        for(Comment comment: display){
+        for (Comment comment: display) {
 
             String dashboard = null;
-            if (dashboardService!=null){
+            if (dashboardService != null) {
                 try {
                     dashboard = dashboardService.createReport(comment);
                 } catch (ApiException e) {
@@ -64,11 +64,10 @@ public class CommentMonitor extends Monitor<Comment, Comment>{
                 }
             }
 
-            if(printer instanceof SpecialPrinterService) {
+            if (printer instanceof SpecialPrinterService) {
                 SpecialPrinterService specialPrinter = (SpecialPrinterService) printer;
                 room.getRoom().send(specialPrinter.print(comment, dashboard, null, (String) messages.get(comment.getCommentId())));
-            }
-            else {
+            } else {
                 room.getRoom().send(printer.print(comment, dashboard));
             }
         }

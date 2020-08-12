@@ -5,15 +5,16 @@ import org.sobotics.boson.framework.model.stackexchange.Content;
 public class LengthFilter extends Filter<Content> {
     private int length;
 
-    public LengthFilter(int length){
+    public LengthFilter(int length) {
         this.length = length;
     }
 
     @Override
     public boolean filter(Content data) {
-        if(length <0)
+        if (length < 0) {
             return data.getBody().length() < -length;
-        else
+        } else {
             return data.getBody().length() > length;
+        }
     }
 }
